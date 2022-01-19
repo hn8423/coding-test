@@ -5,7 +5,7 @@ const solution = (jobs) => {
   jobs.sort((a, b) => {
     return a[0] - b[0];
   });
-  //ㄴㄹㅁㄴ
+  ////
   const priorityQueue = [];
   while (j < jobs.length || priorityQueue.length !== 0) {
     if (jobs.length > j && time >= jobs[j][0]) {
