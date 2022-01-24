@@ -12,6 +12,7 @@ function ArrayChallenge(arr) {
   }
   return sum.length > 0 ? sum.join(" ") : -1;
 }
+//not good`
 console.log(ArrayChallenge(input));
 console.log(ArrayChallenge(input2));
 console.log(ArrayChallenge(input3));
