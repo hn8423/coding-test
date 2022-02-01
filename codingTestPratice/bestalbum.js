@@ -46,7 +46,7 @@ function solution(genres, plays) {
     let max = [...map.entries()].reduce((a, b) => (a[1] > b[1] ? a : b))[0]; // 가장 많이 재생된 장르
 
     // 가장 많이 재생된 장르와 같은 장르만 thisGenreSongs에 저장gkss
-    //how to that?
+    //how to thatt
     genres.filter((genre, index) => {
       if (genre === max) {
         thisGenreSongs.push(plays[index]);
