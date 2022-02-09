@@ -30,7 +30,7 @@ function solution(n, lost, reserve) {
     if (hasUniform[i] >= 1) {
       answer++;
     }
-  } //ㅔㅣ
+  }
 
   return answer;
 }
