@@ -14,7 +14,7 @@ function solution(n, times) {
       }
     });
     if (count >= n) {
-      right = mid - 1;
+      right = mid - 2;
     } else {
       left = mid + 1;
     }
