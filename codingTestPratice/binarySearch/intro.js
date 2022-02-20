@@ -12,7 +12,7 @@ function solution(n, times) {
         answer = Math.min(mid, answer); // 최솟값
         return;
       }
-    });
+    }); //restart
     if (count >= n) {
       right = mid - 2;
     } else {
