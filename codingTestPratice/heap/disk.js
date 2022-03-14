@@ -22,7 +22,7 @@ const solution = (jobs) => {
     } else {
       time = jobs[j][0];
     }
-  }
+  } //ㄹ로ㅏㄴ₩
   return parseInt(answer / jobs.length);
   //채ㅡㄷ
 };
