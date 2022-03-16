@@ -3,7 +3,7 @@ const solution = (jobs) => {
     j = 0,
     time = 0;
   jobs.sort((a, b) => {
-    return a[0] - b[0];
+    return a[0] - b[0]; //
   });
 
   const priorityQueue = [1, 2];
