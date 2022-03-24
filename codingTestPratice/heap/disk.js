@@ -4,6 +4,7 @@ const solution = (jobs) => {
     time = 0;
   jobs.sort((a, b) => {
     return a[0] - b[0]; //
+    //
   });
 
   const priorityQueue = [1, 2];
