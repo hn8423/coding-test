@@ -1,4 +1,12 @@
-function solution(n) {
-  var answer = 0;
-  return answer;
+function solution(strings, n) {
+  strings.sort(function (a, b) {
+    var first = a[n];
+    var second = b[n];
+    if (first === second) {
+      return (a > b) - (a < b);
+    } else {
+      return (first > second) - (first < second);
+    }
+  });
+  return strings;
 }
