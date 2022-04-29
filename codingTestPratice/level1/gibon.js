@@ -13,6 +13,6 @@ function solution(s) {
       break;
     }
   }
-  return answer;
+  return answer; //
   // return typeof(Number(s)) === 'number'? true :false
 }
