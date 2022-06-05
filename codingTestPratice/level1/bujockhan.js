@@ -12,3 +12,4 @@ function solution(price, money, count) {
 
   return answer < 0 ? answer * -1 : 0;
 }
+//
