@@ -9,5 +9,5 @@ function solution(n, arr1, arr2) {
   let test = [39, 21].map((v) => {
     return v.toString(2);
   });
-  return test;
+  return two;
 }
