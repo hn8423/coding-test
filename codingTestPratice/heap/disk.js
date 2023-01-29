@@ -25,5 +25,4 @@ const solution = (jobs) => {
     }
   } //ㄹ로ㅏㄴ₩
   return parseInt(answer / jobs.length);
-  //채ㅡㄷ
 };
