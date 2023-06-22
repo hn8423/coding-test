@@ -2,23 +2,16 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-n,r = map(int, input().split())
+n=int(input())
+array=list(map(int, input().split()))
 
+d = [1]*n
+d[0] = array[0]
+for i in range(1,n):
+    for j in range(i):
+        if array[j]<array[i]:
+            d[i]=max(d[i],d[j]+array[i])
+        else:
+            d[i]=max(d[i],array[i])
 
-# 1.
-cache = [[0 for _ in range(r+1)] for _ in range(n+1)]
-
-# 2.
-for i in range(n+1):
-    cache[i][0] = 1
-for i in range(r+1):
-    cache[i][i] = 1
-
-# 3.
-for i in range(1, n+1):
-    for j in range(1, r+1):
-        cache[i][j] = cache[i-1][j] + cache[i-1][j-1]
-
-print( cache[n][r]%10007)
-
-
+print(max(d))

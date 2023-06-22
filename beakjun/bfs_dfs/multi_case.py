@@ -1,37 +1,48 @@
-# 각 노드별 갯수 구하면 됨 
-
-
 import sys
 from collections import deque
+input = sys.stdin.readline
+
+n,m = map(int,input().split())
+graph = []
+for i in range(n):
+    graph.append(list(map(int,input().split())))
 
 
-def bfs(graph, start):
-    num = [0] * (n+1)
-    visited = [start]
-    queue = deque()
-    queue.append(start)
+dx = [1,-1,0,0]
+dy = [0,0,1,-1]
+ans = []
 
-    while queue:
-        a = queue.popleft()
-        for i in graph[a]:
-            if i not in visited:
-                num[i] = num[a] + 1
-                visited.append(i)
-                queue.append(i)
-    return sum(num)
+pic_count =0
+max_count = 0
+visited = [[0]*m for _ in range(n)]
 
-
-if __name__ == '__main__':
-    n, m = map(int, input().split())
-    graph = [[] for _ in range(n+1)]
+def bfs(graph,x,y):
+    q= deque()
+    q.append([x,y])
+    graph[x][y] =0
+    cnt =1
     
-    for i in range(m):
-        a, b = map(int, input().split())
-        graph[a].append(b)
-        graph[b].append(a)
+    while q:
+        x,y = q.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0<=nx<n and 0<=ny<m and visited[nx][ny]==0:
+                if graph[nx][ny] == 1:
+                    graph[nx][ny] = 0
+                    q.append([nx,ny])
+                    cnt += 1
+    return cnt
 
-    result = []
-    for i in range(1, n+1):
-        result.append(bfs(graph, i))
-
-    # print(result.index(min(result))+1)
+paint = []
+for i in range(n):
+    for j in range(m):
+        if(graph[i][j] == 1):
+            paint.append(bfs(graph,i,j))
+            
+if len(paint) == 0:
+    print(len(paint))
+    print(0)
+else:
+    print(len(paint))
+    print(max(paint))
