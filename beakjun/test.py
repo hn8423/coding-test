@@ -1,17 +1,13 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
+import math
 
-n=int(input())
-array=list(map(int, input().split()))
-
-d = [1]*n
-d[0] = array[0]
-for i in range(1,n):
-    for j in range(i):
-        if array[j]<array[i]:
-            d[i]=max(d[i],d[j]+array[i])
-        else:
-            d[i]=max(d[i],array[i])
-
-print(max(d))
+n = int(input())
+dp = [x for x in range (n+1)]
+for i in range(1,n+1):
+    for j in range(1,i):
+        if j*j > i :
+            break
+        if dp[i] > dp[i-j*j] + 1 :
+            dp[i] = dp[i-j*j] + 1
+print(dp[n])
