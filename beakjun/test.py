@@ -1,6 +1,7 @@
 import sys
 input = sys.stdin.readline
 import math
+# ㄹㄴㅁ
 
 n = int(input())
 dp = [x for x in range (n+1)]
