@@ -1,17 +1,18 @@
-const readFileSyncAddress =
-  process.platform === "linux" ? "/dev/stdin" : "example.txt";
-let input = require("fs")
-  .readFileSync(readFileSyncAddress)
-  .toString()
-  .split("\n");
-let N = Number(input[0]);
-let level = input.slice(1).map(Number).reverse();
-let count = 0;
+let m = 4;
+let section = [2, 3, 6];
 
-for (let i = 0; i < N - 1; i++) {
-  if (level[i] <= level[i + 1]) {
-    count += level[i + 1] - level[i] + 1;
-    level[i + 1] = level[i] - 1;
-  }
+let cur = section[0];
+let count = 0;
+while (section.length) {
+  section.filter((v) => {
+    if (cur <= v && v < cur + m) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  count++;
+
+  cur += m;
 }
 console.log(count);
