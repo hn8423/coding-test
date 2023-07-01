@@ -18,19 +18,11 @@ function solution(sequence, k) {
     }
   }
 
-  if (result.length === 1) {
-    return result[0];
-  } else {
-    let sizeArr = result.map((v, i) => {
-      return v[1] - v[0];
-    });
-    let min = Math.min(...sizeArr);
-
-    if (result.length !== new Set(sizeArr).size) {
-      return result[0];
-    } else {
-      return result[sizeArr.indexOf(min)];
-    }
-  }
+  return result.sort(condition)[0];
 }
-console.log(solution([1, 1, 1, 2, 3, 4, 5], 5));
+//중복값 정렬방법
+function condition(a, b) {
+  const lenDiff = Math.abs(a[0] - a[1]) - Math.abs(b[0] - b[1]);
+  if (lenDiff !== 0) return lenDiff; // 길이에 따라 정렬
+  return a[0] - b[0]; // 그 외는 0번째 원소 index가 낮은 순서로 정렬
+}
