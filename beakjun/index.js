@@ -1,21 +1,35 @@
-function solution(gems) {
-  //투포인터로 진행
-  let left = 0;
-  let right = gems.length - 1;
+function solution(stones, k) {
+  let max = Math.max(...stones);
+  let min = 0;
+  let count = parseInt((max + min) / 2);
 
-  var answer = [];
+  //while문으로 한사람씩 가는것으로 진행
   while (true) {
-    let leftResult = new Set(gems.slice(left + 1, right + 1));
-    let rightResult = new Set(gems.slice(left, right));
-    if (rightResult.has(gems[right])) {
-      right--;
-    } else if (leftResult.has(gems[left])) {
-      left++;
-    } else {
-      answer = [left + 1, right + 1];
+    let zeroCount = 0;
+    let zeroArr = [];
+    for (let i = 0; i < stones.length; i++) {
+      if (stones[i] - count > 0) {
+        zeroArr.push(zeroCount);
+        zeroCount = 0;
+      } else {
+        zeroCount++;
+      }
+    }
+
+    let zeroMax = Math.max(...zeroArr);
+
+    if (k === zeroMax) {
       break;
+    } else if (k > zeroMax) {
+      min = count;
+      count = parseInt((count + max) / 2);
+    } else {
+      max = count;
+      count = parseInt(min + count / 2);
     }
   }
-  return answer;
+
+  return count;
 }
-console.log(solution(["XYZ", "XYZ", "XYZ"]));
+
+console.log(solution([2, 4, 5, 3, 2, 1, 4, 2, 5, 1], 3));
