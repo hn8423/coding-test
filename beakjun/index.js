@@ -1,118 +1,45 @@
-function solution(rows, columns, queries) {
-  var answer = [];
-  let board = Array.from({ length: rows }, () => Array(columns).fill(0)); //체크
-
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      board[i][j] = board[i].length * i + j + 1;
+function solution(book_time) {
+  //분단위로 숫자 바꾸고  시작 시간 순서대로 sorting
+  let intArr = book_time
+    .map((v) => {
+      let result = [];
+      let start = v[0].split(":");
+      let end = v[1].split(":");
+      return [
+        Number(start[0]) * 60 + Number(start[1]),
+        Number(end[0]) * 60 + Number(end[1]),
+      ];
+    })
+    .sort((a, b) => a[0] - b[0]);
+  let rooms = [];
+  //for문 sorting한 예약 시간 배열 돌리기 돌리기
+  for (let i = 0; i < intArr.length; i++) {
+    //방 돌아가는 2중 포문 돌리기
+    // 방 푸쉬 처음 시작 손님 받고 끝나는 시간 + 10분 체크
+    if (i === 0) {
+      rooms.push(book_time[i]);
+      continue;
     }
+
+    // 다음 손님 시작 시간이 첫 손님 끈나는 시간 + 10분 이후 라면 처음 손님 지우고 다음손님 ㄱㄱ
+    rooms.forEach((room) => {
+      if (book_time[i][0] >= room[1] + 10) {
+        rooms = rooms.filter((v) => v !== room);
+      }
+    });
+    // 시작 시간 이전이라면 다음 손님 방 배열에 넣고 contineu
+    rooms.push(book_time[i]);
   }
-  let lowValue = [];
-  queries.forEach((arr) => {
-    let check = Array.from({ length: rows }, () => Array(columns).fill(0));
-    //값을 저장
-    let curRow = arr[0] - 1;
-    let curCol = arr[1] - 1;
-    let curValue = board[curRow][curCol];
-
-    while (true) {
-      //오른쪽으로 갈수있는지, 왼쪽 체크 되어있는지, 꼭지점인지
-      if (
-        (curCol + 1 !== arr[3] && check[curRow][curCol - 1] === 1) ||
-        (curRow === arr[0] - 1 && curCol === arr[1] - 1)
-      ) {
-        if (check[curRow][curCol + 1] === 1) {
-          break;
-        }
-        //체크
-        check[curRow][curCol] = 1;
-        //값넣고
-        //이동
-        lowValue.push(curValue);
-        let localVal = curValue;
-        if (curCol + 1 <= arr[3] - 1) {
-          //변환 현재 인덱스도 변환
-          curCol++;
-        } else {
-          curRow++;
-        }
-        curValue = board[curRow][curCol];
-        board[curRow][curCol] = localVal;
-        //아래으로 갈수있는지,위쪽 체크 되어있는지,꼭지점인지
-      } else if (
-        (curRow - 1 >= arr[0] - 1 &&
-          check[curRow - 1][curCol] === 1 &&
-          curRow + 1 !== arr[2] &&
-          check[curRow + 1][curCol] !== 1) ||
-        (curRow === arr[0] - 1 && curCol === arr[3] - 1)
-      ) {
-        //체크
-        check[curRow][curCol] = 1;
-        //값넣고
-        lowValue.push(curValue);
-        //이동
-        //변환
-        let localVal = curValue;
-        if (curRow + 1 <= arr[2] - 1) {
-          curRow++;
-        } else {
-          curCol--;
-        }
-        if (curRow === arr[0] - 1 && curCol === arr[1] - 1) {
-          break;
-        }
-        curValue = board[curRow][curCol];
-        board[curRow][curCol] = localVal;
-      }
-      //왼쪽으로 갈수있는지,오른쪽 체크 되어있는지,꼭지점인지
-      else if (
-        (curCol - 1 !== arr[1] - 2 && check[curRow][curCol + 1] === 1) ||
-        (curRow === arr[2] - 1 && curCol === arr[3] - 1)
-      ) {
-        //체크
-        check[curRow][curCol] = 1;
-        //값넣고
-        lowValue.push(curValue);
-        //이동
-        //변환
-        let localVal = curValue;
-        if (curCol - 1 >= arr[1] - 1) {
-          curCol--;
-        } else {
-          curRow--;
-        }
-        curValue = board[curRow][curCol];
-        board[curRow][curCol] = localVal;
-      }
-      //위로 갈수있는지,아랫쪽 체크 되어있는지,꼭지점인지
-      else if (
-        (curRow + 1 !== arr[2] &&
-          curRow - 1 !== arr[0] - 2 &&
-          check[curRow + 1][curCol] === 1) ||
-        (curRow === arr[2] - 1 && curCol === arr[1] - 1)
-      ) {
-        //체크
-        check[curRow][curCol] = 1;
-        //값넣고
-        lowValue.push(curValue);
-        //이동
-        //변환
-        let localVal = curValue;
-        if (curRow - 1 >= arr[0] - 1) {
-          curRow--;
-        } else {
-          break;
-        }
-        curValue = board[curRow][curCol];
-        board[curRow][curCol] = localVal;
-      }
-      //변환
-      //다 옮기면 break
-    }
-    answer.push(Math.min(...lowValue));
-    lowValue = [];
-  });
-  return answer;
+  //포문 끝나면 배열 길이 체크
+  var answer = 0;
+  return rooms.length;
 }
 
-console.log(solution(100, 97, [[1, 1, 100, 97]]));
+console.log(
+  solution([
+    ["09:10", "10:10"],
+    ["09:10", "10:10"],
+    ["10:20", "12:20"],
+    ["10:20", "12:20"],
+  ])
+);
