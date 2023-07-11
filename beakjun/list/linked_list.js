@@ -49,3 +49,59 @@ class LinkedList {
     current.next = current.next.next;
   }
 }
+
+//  ll = LinkedList()
+//  ll.append(1)
+//  ll.append(2)
+//  ll.append(3)
+//  ll.append(4)
+//  ll.append(5)
+//  ll.remove(3)
+//  print(ll.get(3))
+
+// 양방향 링크드 리스트
+class ListNode {
+  constructor(val = 0, next = None, prev = None) {
+    this.val = val;
+    this.next = next;
+    this.prev = prev;
+  }
+}
+
+class BrowserHistory {
+  constructor(homepage) {
+    this.head = this.current = new ListNode((val = homepage));
+  }
+
+  visit(url) {
+    this.current.next = new ListNode((val = url), (prev = this.current));
+    this.current = this.current.next;
+    return None;
+  }
+  back(steps) {
+    while (steps > 0 && this.current.prev !== None) {
+      steps -= 1;
+      this.current = this.current.prev;
+    }
+    return this.current.val;
+  }
+  back(steps) {
+    while (steps > 0 && this.current.prev !== None) {
+      steps -= 1;
+      this.current = this.current.next;
+    }
+    return this.current.val;
+  }
+}
+
+// # browserHistory = BrowserHistory("leetcode.com");
+// # browserHistory.visit("google.com");
+// # browserHistory.visit("facebook.com");
+// # browserHistory.visit("youtube.com");
+// # browserHistory.back(1);
+// # browserHistory.back(1);
+// # browserHistory.forward(1);
+// # browserHistory.visit("linkedin.com");
+// # browserHistory.forward(2);
+// # browserHistory.back(2);
+// # browserHistory.back(7);
