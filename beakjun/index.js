@@ -1,22 +1,47 @@
-function solution(stones, k) {
-  // 이분탐색을 사용한다.
-  let left = 1;
-  let right = 200000000;
+function solution(board) {
+  const N = board.length;
+  const dirs = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
 
-  while (left <= right) {
-    const mid = ((left + right) / 2) >> 0;
+  const q = [
+    [0, 0, 0, 0],
+    [0, 0, 1, 0],
+  ];
 
-    let count = 0;
-    for (let i = 0; i < stones.length; i++) {
-      if (stones[i] - mid <= 0) count++;
-      else count = 0;
+  const dp = Array.from({ length: N }, () =>
+    Array.from({ length: N }, () => Array(dirs.length).fill(Infinity))
+  );
 
-      if (count === k) break;
-    }
+  const isInBoard = (x, y) =>
+    x >= 0 && x < N && y >= 0 && y < N && board[x][y] !== 1;
 
-    if (count === k) right = mid - 1;
-    else left = mid + 1;
+  while (q.length) {
+    const [x, y, pDirI, cost] = q.shift();
+
+    dirs.forEach(([dx, dy], nDirI) => {
+      const [nx, ny] = [x + dx, y + dy];
+      if (!isInBoard(nx, ny)) return;
+
+      const newCost = cost + (pDirI === nDirI ? 100 : 600);
+
+      if (newCost < dp[nx][ny][nDirI]) {
+        dp[nx][ny][nDirI] = newCost;
+        q.push([nx, ny, nDirI, newCost]);
+      }
+    });
   }
 
-  return left;
+  return Math.min(...dp[N - 1][N - 1]);
 }
+
+console.log(
+  solution([
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ])
+);
