@@ -1,47 +1,32 @@
-function solution(board) {
-  const N = board.length;
-  const dirs = [
-    [0, 1],
-    [1, 0],
-    [0, -1],
-    [-1, 0],
-  ];
-
-  const q = [
-    [0, 0, 0, 0],
-    [0, 0, 1, 0],
-  ];
-
-  const dp = Array.from({ length: N }, () =>
-    Array.from({ length: N }, () => Array(dirs.length).fill(Infinity))
-  );
-
-  const isInBoard = (x, y) =>
-    x >= 0 && x < N && y >= 0 && y < N && board[x][y] !== 1;
-
-  while (q.length) {
-    const [x, y, pDirI, cost] = q.shift();
-
-    dirs.forEach(([dx, dy], nDirI) => {
-      const [nx, ny] = [x + dx, y + dy];
-      if (!isInBoard(nx, ny)) return;
-
-      const newCost = cost + (pDirI === nDirI ? 100 : 600);
-
-      if (newCost < dp[nx][ny][nDirI]) {
-        dp[nx][ny][nDirI] = newCost;
-        q.push([nx, ny, nDirI, newCost]);
-      }
-    });
+function solution(wallpaper) {
+  let board = [];
+  for (let i = 0; i < wallpaper.length; i++) {
+    board.push(wallpaper[i].split(""));
   }
 
-  return Math.min(...dp[N - 1][N - 1]);
+  let minx = Infinity;
+  let miny = Infinity;
+  let maxx = 0;
+  let maxy = 0;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] === "#") {
+        minx = Math.min(minx, i);
+        miny = Math.min(miny, j);
+        maxx = Math.max(maxx, i);
+        maxy = Math.max(maxy, j);
+      }
+    }
+  }
+  return [minx, miny, maxx + 1, maxy + 1];
 }
 
 console.log(
   solution([
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
+    "..........",
+    ".....#....",
+    "......##..",
+    "...##.....",
+    "....#.....",
   ])
 );
