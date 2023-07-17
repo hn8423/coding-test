@@ -1,41 +1,22 @@
 function solution(weights) {
-  var answer = 0;
-  //     한번씩 확인
-  //     하나 확인할때 j 랑 각각 비교 해야함
-  for (let i = 0; i < weights.length - 1; i++) {
-    for (let j = i + 1; j < weights.length; j++) {
-      let first = weights[i];
-      let next = weights[j];
+  let answer = 0;
+  const store = {}; //key-value
+  const cal = [1, 3 / 2, 2, 4 / 3]; //경우의 수 (1,1), (2,3), (2,4), (3,4)
 
-      if (first === next) {
-        //             22
-        answer++;
-      } else if (first * 2 === next * 3) {
-        //             23
-        answer++;
-      } else if (first * 3 === next * 2) {
-        //             32
-        answer++;
-      } else if (first * 2 === next * 4) {
-        //             24
-
-        answer++;
-      } else if (first * 4 === next * 2) {
-        //             42
-
-        answer++;
-      } else if (first * 4 === next * 3) {
-        //             43
-
-        answer++;
-      } else if (first * 3 === next * 4) {
-        //             34
-
-        answer++;
-      }
-    }
-  }
+  weights
+    .sort((a, b) => b - a)
+    .forEach((w) => {
+      //내림차순 정렬 후, 전체 돌면서
+      let s;
+      cal.forEach((i) => {
+        if (((s = w * i), store[s])) {
+          //해당 비율을 곱한 값이 store에 존재할 경우
+          answer += store[s];
+        }
+      });
+      if (!store[w]) store[w] = 1;
+      else store[w]++;
+    });
   return answer;
 }
-
 console.log(solution([100, 180, 360, 100, 270]));
