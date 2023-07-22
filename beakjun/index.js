@@ -7,9 +7,3 @@ function solution(s) {
   return answer;
 }
 console.log(solution("abcdcba"));
-// for (let j = i + 1; j <= s.length; j++) {
-//   let sub = s.substr(i, j);
-//   if (sub === sub.split("").reverse().join("")) {
-//     answer = Math.max(answer, sub.length);
-//   }
-// }
