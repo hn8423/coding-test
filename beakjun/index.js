@@ -4,6 +4,6 @@ function solution(s) {
 
   for (let i = 0; i < s.length; i++) {}
 
-  return answer;
+  return 'answer';
 }
 console.log(solution("abcdcba"));
