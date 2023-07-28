@@ -7,7 +7,6 @@ let input = [];
 rl.on("line", function (line) {
   input.push(line);
 }).on("close", async function () {
-  // 답안 작성
   let answer = "";
   let n = input[0];
   let arr = "1001 " + input[1];
