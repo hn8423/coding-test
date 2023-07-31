@@ -65,14 +65,13 @@ function solution(scoville, K) {
     heap.heappush(scoville[i]);
   }
   let answer = 0;
-  while (heap.getMin() < K && heap.size() > 0) {
+  while (heap.getMin() < K && heap.size() > 1) {
     answer++;
     let first = heap.heappop();
     let second = heap.heappop();
     let sum = first + second * 2;
     heap.heappush(sum);
   }
+  //마지막 조건인 스코빌이 K가 될 수 없는 조건을 생각해보세요
   return heap.getMin() >= K ? answer : -1;
 }
-
-console.log(solution([1, 2, 3, 9, 10, 12], 7));
