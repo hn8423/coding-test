@@ -16,6 +16,7 @@ function bfs(row, col) {
   const dy = [0, 1, 0, -1]; //동서남북 조회
   const queue = [];
   queue.push([row, col]);
+  a;
   check[row][col] = 1;
   while (queue.length) {
     const [x, y] = queue.shift();
