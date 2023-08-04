@@ -6,16 +6,21 @@ let input = require("fs")
   .trim()
   .split("\n");
 
-const N = +input[0];
-const dp = Array(31).fill(0);
-dp[1] = 0;
-dp[2] = 3;
+let [N, K] = input[0].split(" ").map(Number);
 
-for (let i = 4; i <= N; i += 2) {
-  dp[i] = dp[i - 2] * 3 + 2;
-
-  for (let j = i - 4; j >= 0; j -= 2) {
-    dp[i] += dp[j] * 2;
+const coin = [
+  ...new Set(
+    input
+      .slice(1)
+      .map(Number)
+      .filter((v) => v <= K)
+  ),
+];
+const dp = new Array(10001).fill(Infinity);
+dp[0] = 0;
+coin.forEach((v) => {
+  for (let i = v; i <= K; i++) {
+    dp[i] = Math.min(dp[i], dp[i - v] + 1);
   }
-}
-console.log(dp[N]);
+});
+console.log(dp[K] == Infinity ? -1 : dp[K]);
