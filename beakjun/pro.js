@@ -1,34 +1,33 @@
-function solution(m, n, puddles) {
-  const dp = new Array(n + 1).fill().map((_) => new Array(m + 1).fill(0));
-  // [n+1][m+1] 크기의 배열을 0으로 초기화한다.
-  // 각각 +1을 해주는 이유는 역시 DP 에서 많이 쓰이는 테크닉인데
-  // 계산의 편의성을 위해 배열의 첫번째 값은 비워두고 사용하기 위해 선언하는 경우가 많다.
-  // m과 n의 위치에 주의하자! 문제에서는 m이 x축, n이 y축이다.
-
-  for (let i = 1; i <= n; i++) {
-    for (let j = 1; j <= m; j++) {
-      if (i === 1 && j === 1) {
-        // 집의 위치를 1로 설정해주면
-        // 아래 점화식을 통해 별다른 조건없이 직선 경로를 1로 초기화할 수 있다.
-        dp[1][1] = 1;
-        continue;
-      }
-      // 해당 반복문에서 j가 x좌표, i가 y좌표인 것에 주의하자!
-      if (isPuddle(j, i, puddles)) continue;
-      dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % 1000000007;
-    }
+function solution(data, col, row_begin, row_end) {
+  // 정답 변수
+  let result = 0;
+  // col번째 컬럼의 값을 기준으로 오름차순 정렬
+  const sortData = data.sort((a, b) => {
+    if (a[col - 1] > b[col - 1]) return 1;
+    // 동일하면 첫 번째 컬럼 기준 내림차순 정렬
+    else if (a[col - 1] === b[col - 1]) return b[0] - a[0];
+    else return -1;
+  });
+  // i 번째 행의 튜플에 대해 각 컬럼의 값을 i 로 나눈 나머지들의 합으로 정의
+  for (let i = row_begin; i <= row_end; i++) {
+    // 결괏값을 정답 변수에 XOR
+    result ^= sortData[i - 1]
+      .map((a) => a % i)
+      .reduce((acc, cur, idx) => acc + cur, 0);
   }
-
-  return dp[n][m];
+  return result;
 }
 
-// 주어진 좌표에 물 웅덩이가 있다면 true를 반환한다
-// 이때 x, y좌표의 순서에 주의하자!
-const isPuddle = (x, y, puddles) => {
-  for (const puddle of puddles) {
-    if (puddle[0] === y && puddle[1] === x) return true;
-  }
-  return false;
-};
-
-console.log(solution(4, 3, [[2, 2]]));
+console.log(
+  solution(
+    [
+      [2, 2, 6],
+      [1, 5, 10],
+      [4, 2, 9],
+      [3, 8, 3],
+    ],
+    2,
+    2,
+    3
+  )
+);
