@@ -1,4 +1,6 @@
-function solution(data, col, row_begin, row_end) {}
+function solution(data, col, row_begin, row_end) {
+  return true;
+}
 
 console.log(
   solution(
