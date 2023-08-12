@@ -1,5 +1,5 @@
 function solution(data, col, row_begin, row_end) {
-  return "true";
+  return "tru";
 }
 
 console.log(
