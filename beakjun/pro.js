@@ -1,17 +1,17 @@
-function solution(data, col, row_begin, row_end) {
-  return "true";
+function solution(n) {
+  let answer = [];
+
+  function hanoi(n, from, to, via) {
+    if (n === 1) answer.push([from, to]);
+    else {
+      hanoi(n - 1, from, via, to);
+      answer.push([from, to]);
+      hanoi(n - 1, via, to, from);
+    }
+  }
+
+  hanoi(n, 1, 3, 2);
+  return answer;
 }
 
-console.log(
-  solution(
-    [
-      [2, 2, 6],
-      [1, 5, 10],
-      [4, 2, 9],
-      [3, 8, 3],
-    ],
-    2,
-    2,
-    3
-  )
-);
+console.log(solution(2));
