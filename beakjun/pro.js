@@ -1,17 +1,38 @@
-function solution(n) {
-  let answer = [];
+function solution(cards) {
+  var answer = 0;
+  const boxList = [];
+  let box = [];
+  let pointer = 0;
+  while (true) {
+    if (cards[pointer] !== 0) {
+      box.push(cards[pointer]);
+      let temp = pointer;
 
-  function hanoi(n, from, to, via) {
-    if (n === 1) answer.push([from, to]);
-    else {
-      hanoi(n - 1, from, via, to);
-      answer.push([from, to]);
-      hanoi(n - 1, via, to, from);
+      pointer = cards[pointer] - 1;
+      cards[temp] = 0;
+    } else {
+      let check = [...new Set(cards)].length;
+      boxList.push(box);
+      if (check !== 1) {
+        box = [];
+        let i = 0;
+        while (i < cards.length) {
+          if (cards[i] !== 0) {
+            pointer = i;
+            break;
+          }
+          i++;
+        }
+      } else {
+        break;
+      }
     }
   }
-
-  hanoi(n, 1, 3, 2);
-  return answer;
+  let resultApp = boxList
+    .sort((a, b) => b.length - a.length)
+    .map((v) => v.length);
+  let result = resultApp[0] * resultApp[1];
+  return result;
 }
 
-console.log(solution(2));
+console.log(solution([8, 6, 3, 7, 2, 5, 1, 4]));
