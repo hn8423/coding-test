@@ -1,7 +1,7 @@
 function solution(board) {
   var answer = 0;
   board = board.map((items) => items.split(""));
-
+  // test
   const q = [];
   const n = board.length; // 가로 길이
   const m = board[0].length; // 세로 길이
