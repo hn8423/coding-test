@@ -4,8 +4,6 @@ function solution(park, routes) {
   const maxCol = park[0].length - 1;
 
   // 시작 지점의 좌표를 구한다.
-  // findIndex(), includes() 메서드를 이용해 몇 번째 행에 있는지를 구한다.
-  // 구한 행에서 indexOf() 메서드를 이용해 몇 번째 열에 있는지 구한다.
   let row = park.findIndex((s) => s.includes("S"));
   let col = park[row].indexOf("S");
 
