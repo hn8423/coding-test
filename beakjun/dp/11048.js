@@ -13,7 +13,7 @@ const arr = Array(N)
 const dp = Array(N)
   .fill()
   .map((_) => Array(M).fill(0));
-console.log(dp);
+// f;sdajfa
 
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < M; j++) {
