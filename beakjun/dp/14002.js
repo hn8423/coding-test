@@ -28,4 +28,4 @@ for (let i = 0; i < N; i++) {
 let answer = Math.max(...dp);
 
 console.log(answer);
-console.log(arr[dp.indexOf(answer)].join(" "));
+// console.log(arr[dp.indexOf(answer)].join(" "));
