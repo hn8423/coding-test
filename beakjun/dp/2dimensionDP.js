@@ -21,4 +21,4 @@ for (let i = 2; i <= K; i++) {
   }
 }
 
-console.log(dp[K][N]);
+// console.log(dp[K][N]);
