@@ -9,6 +9,7 @@ function solution(m, n, puddles) {
     for (let j = 1; j <= m; j++) {
       if (i === 1 && j === 1) {
         // 집의 위치를 1로 설정해주면
+        // ifhj;ioas dhfiulasdhui
         // 아래 점화식을 통해 별다른 조건없이 직선 경로를 1로 초기화할 수 있다.
         dp[1][1] = 1;
         continue;
