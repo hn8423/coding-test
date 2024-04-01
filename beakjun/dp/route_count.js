@@ -32,4 +32,4 @@ const isPuddle = (x, y, puddles) => {
   return false;
 };
 
-console.log(solution(4, 3, [[2, 2]]));
+// console.log(solution(4, 3, [[2, 2]]));
