@@ -11,7 +11,7 @@ for (let i = 0; i <= 101; i++) {
     for (let k = 0; k <= 101; k++) {
       memo[i][j][k] = 0;
     }
-    // f;oiasdjfoi;asdjio
+   
   }
 }
 memo[50][50][50] = 1;
