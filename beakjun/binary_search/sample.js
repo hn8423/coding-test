@@ -5,7 +5,7 @@ function solution(stones, k) {
 
   while (left <= right) {
     const mid = ((left + right) / 2) >> 0;
-
+// 
     let count = 0;
     for (let i = 0; i < stones.length; i++) {
       if (stones[i] - mid <= 0) count++;
