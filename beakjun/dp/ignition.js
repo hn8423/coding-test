@@ -8,6 +8,7 @@ var input = fs.readFileSync(readFileSyncAddress).toString().split("\n");
 N = Number(N);
 arr = arr.map(Number);
 
+// fasdfd
 const dp = new Array(N).fill(0);
 dp[0] = arr[0];
 dp[1] = Math.max(arr[0] + arr[1], arr[1]);
