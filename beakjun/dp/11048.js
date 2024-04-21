@@ -5,7 +5,7 @@ let input = require("fs")
   .toString()
   .trim()
   .split("\n");
-  // 
+  
 
 let [N, M] = input[0].split(" ").map(Number);
 const arr = Array(N)
