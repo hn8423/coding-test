@@ -25,4 +25,4 @@ for (let i = 0; i < N; i++) {
   }
 }
 
-console.log(dp[N - 1][M - 1]);
+// console.log(dp[N - 1][M - 1]);ㄴ
