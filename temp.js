@@ -95,4 +95,4 @@ linkedList.append(3);
 linkedList.append(4);
 linkedList.insert(3, 5);
 linkedList.remove(3);
-// console.log(linkedList.tail.data)
+console.log(linkedList.tail.data)
