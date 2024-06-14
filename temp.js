@@ -14,5 +14,5 @@ for (let key in dic) {
     }
 }
 
-//console.log(false)
+console.log(false)
 return
