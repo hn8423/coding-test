@@ -1,18 +1,15 @@
-let nums = [4,1,9,7,5,3,16]
-let target = 14
-let dic = {}
-
-for (let i = 0; i < nums.length; i++) {
-   dic[nums[i]] = true
-}
-
-for (let key in dic) {
-    let other = target - key
-    if(other in dic) {
-        console.log(true)
-        return
+function solution(my_string, indices) {
+    var answer = '';
+    for(let i =0; i < my_string.length; i++){
+        let char = my_string[i]
+        if(indices.includes(i)){
+            continue
+        }else{
+        answer += char   
+        }
+        
     }
+    return answer;
 }
 
-console.log(false)
-return
+// solution("apporoograpemmemprs",	[1, 16, 6, 15, 0, 10, 11, 3])
