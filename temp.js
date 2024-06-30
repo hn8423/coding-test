@@ -11,5 +11,4 @@ function solution(my_string, indices) {
     }
     return answer;
 }
-
-//solution("apporoograpemmemprs",	[1, 16, 6, 15, 0, 10, 11, 3])
+solution("apporoograpemmemprs",	[1, 16, 6, 15, 0, 10, 11, 3])
