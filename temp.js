@@ -1,54 +1,34 @@
-function solution(numbers, hand) {
-    var answer = '';
-    let arr = {
-        1: [0,0],
-        2: [0,1],
-        3: [0,2],
-        4: [1,0],
-        5: [1,1],
-        6: [1,2],
-        7: [2,0],
-        8: [2,1],
-        9: [2,2],
-        '*': [3,0],
-        '0': [3,1],
-        '#': [3,2],
+function solution(today, terms, privacies) {
+    var answer = [];
+    let type = {};
+    for(let i = 0; i < terms.length; i++){
+        let [key, value] = terms[i].split(" ");
+        type[key] = value;
     }
-    let curL =  '*'
-    let curR =  '#'
-    let check = Array.from(Array(3), () => Array(3).fill(0));
-    for(let i = 0; i < numbers.length; i++){
-        let cur = numbers[i]
-        if(cur === 1 || cur === 4 || cur === 7){
-            curL = cur
-            answer += 'L'
-        }else if(cur === 3 || cur === 6 || cur === 9){
-            curR = cur
-            answer += 'R'
-        }else{
-            let curLDis = Math.abs(arr[cur][0] - arr[curL][0]) + Math.abs(arr[cur][1] - arr[curL][1])
-            let curRDis = Math.abs(arr[cur][0] - arr[curR][0]) + Math.abs(arr[cur][1] - arr[curR][1])
-            if(curLDis < curRDis){
-                curL = cur
-                answer += 'L'
-            }else if(curLDis > curRDis){
-                curR = cur
-                answer += 'R'
-            }else{
-                if(hand === 'left'){
-                    curL = cur
-                    answer += 'L'
-                }else{
-                    curR = cur
-                    answer += 'R'
-                }
-            }
-        }
+    for(let i = 0; i < privacies.length; i++){
+      let [date, term] = privacies[i].split(" ");
+      // Convert date string to timestamp
+      let [year, month, day] = date.split('.').map(Number);
+      
+      // Calculate expiration date
+      let expirationMonths = parseInt(type[term]);
+      let expirationDate = new Date(year, month - 1 + expirationMonths, day);
+      let expirationTimestamp = expirationDate.getTime();
+      
+      // Convert today to timestamp for comparison
+      let [todayYear, todayMonth, todayDay] = today.split('.').map(Number);
+      let todayTimestamp = new Date(todayYear, todayMonth - 1, todayDay).getTime();
+      
+      // Check if privacy has expired
+      if (todayTimestamp >= expirationTimestamp) {
+        answer.push(i + 1);
+      }
     }
-
     return answer;
 }
 
 
-
-console.log(solution( [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5]	,"right"))
+console.log(
+    solution("2020.01.01",	["Z 3", "D 5"],	["2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"]
+    )
+)

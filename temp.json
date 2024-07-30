@@ -1,0 +1,11 @@
+{ "response": 
+    { "message": "성공",
+      "data": { 
+        "result_status": "success", 
+        "result_message": "MSDS 물질 검색 성공", 
+        "result_data": [ 
+            { "cas_no": "7782-50-5", "chem_id": "001020", "chem_name": "염소" }
+             ] 
+            } 
+        } 
+    }
