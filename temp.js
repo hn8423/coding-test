@@ -28,7 +28,7 @@ function solution(today, terms, privacies) {
 }
 
 
-console.log(
+//console.log(
     solution("2020.01.01",	["Z 3", "D 5"],	["2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"]
     )
 )
