@@ -1,34 +1,35 @@
-function solution(today, terms, privacies) {
-    var answer = [];
-    let type = {};
-    for(let i = 0; i < terms.length; i++){
-        let [key, value] = terms[i].split(" ");
-        type[key] = value;
-    }
-    for(let i = 0; i < privacies.length; i++){
-      let [date, term] = privacies[i].split(" ");
-      // Convert date string to timestamp
-      let [year, month, day] = date.split('.').map(Number);
-      
-      // Calculate expiration date
-      let expirationMonths = parseInt(type[term]);
-      let expirationDate = new Date(year, month - 1 + expirationMonths, day);
-      let expirationTimestamp = expirationDate.getTime();
-      
-      // Convert today to timestamp for comparison
-      let [todayYear, todayMonth, todayDay] = today.split('.').map(Number);
-      let todayTimestamp = new Date(todayYear, todayMonth - 1, todayDay).getTime();
-      
-      // Check if privacy has expired
-      if (todayTimestamp >= expirationTimestamp) {
-        answer.push(i + 1);
+function solution(bandage, health, attacks) {
+  let maxTime = Math.max(...attacks.map(attack => attack[0]));
+  let currentHealth = health;
+  let currentTime = 0;
+  let combo = 0;
+  var answer = 0;
+  for (let i = 0; i <= maxTime; i++) {
+    if (attacks.some(attack => attack[0] === i)) {
+      currentHealth -= attacks.find(attack => attack[0] === i)[1];
+      combo = 0;
+      if (currentHealth <= 0) {
+        return -1;
+      }
+    }else{
+
+      if (combo % bandage[0] === 0 && combo !== 0 && currentHealth < health) {
+        currentHealth += bandage[2];
+        combo++;
+      }else if(combo % bandage[0] !== 0  && currentHealth < health){
+        currentHealth += bandage[1];
+        combo++;
       }
     }
-    return answer;
+
+    currentTime++;
+  }
+  return currentHealth;
 }
 
 
 console.log(
-    solution("2020.01.01",	["Z 3", "D 5"],	["2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"]
+    solution(
+      [5, 1, 5],	30,	[[2, 10], [9, 15], [10, 5], [11, 5]]
     )
 )
